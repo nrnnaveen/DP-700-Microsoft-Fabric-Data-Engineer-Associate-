@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DP-700: Microsoft Fabric Data Engineer Practice Exam</title>
+    <style>
+        :root {
+            --primary: #0078d4;
+            --primary-dark: #106ebe;
+            --background: #f3f2f1;
+            --card-bg: #ffffff;
+            --text: #323130;
+            --border: #edebe9;
+            --success: #107c41;
+            --wrong: #a80000;
+        }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #11355c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .info-panel {
+            background-color: #e1dfdd;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        .question-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .q-num {
+            color: var(--primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .q-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            background-color: #faf9f8;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+        .option:hover {
+            background-color: #f3f2f1;
+            border-color: #a19f9d;
+        }
+        .option.selected {
+            background-color: #eff6fc;
+            border-color: var(--primary);
+            font-weight: 600;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+        button:disabled {
+            background-color: #c8c6c4;
+            cursor: not-allowed;
+        }
+        .result-screen {
+            display: none;
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        .pass { color: var(--success); font-weight: bold; font-size: 1.5rem; }
+        .fail { color: var(--wrong); font-weight: bold; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DP-700 Practice Engine</h1>
+    <p>Implementing Data Engineering Solutions Using Microsoft Fabric</p>
+</header>
+
+<div class="container">
+    <div id="quiz-wrapper">
+        <div class="info-panel">
+            <span id="progress">Question 1 of 40</span>
+            <span id="score-tracking">Passing Score: 70%</span>
+        </div>
+
+        <div id="quiz-container"></div>
+
+        <div class="btn-container">
+            <button id="prev-btn" onclick="prevQuestion()" disabled>Previous</button>
+            <button id="next-btn" onclick="nextQuestion()">Next</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="result-screen">
+        <h2>Exam Completed!</h2>
+        <div class="score" id="final-score">0%</div>
+        <div id="pass-fail-msg"></div>
+        <p style="margin-top:20px;">You can review your answers or refresh to try again.</p>
+        <h1 style="color: #a80000;"> Made By Naveen</h1>
+        <button onclick="location.reload()" style="margin-top: 15px;">Restart Test</button>
+    </div>
+</div>
+
+<script>
+const questions = [
+    {
+        "q": "You need to access historical tabular data stored in an external Azure Data Lake Storage (ADLS) Gen2 account from a Microsoft Fabric Lakehouse without physically migrating or copying the files. What should you create?",
+        "options": ["A. A shortcut", "B. A managed table", "C. A pipeline copy activity", "D. A Dataflow Gen2 destination"],
+        "answer": 0
+    },
+    {
+        "q": "You are managing a Microsoft Fabric Warehouse containing confidential employee records. You must restrict members of the Analyst security group from viewing values in the 'Hourly_Rate' column. What should you configure?",
+        "options": ["A. Row-level security (RLS)", "B. Column-level security (CLS)", "C. OneLake shared access signatures", "D. Workspace Contributor roles"],
+        "answer": 1
+    },
+    {
+        "q": "Which data write optimization format does Microsoft Fabric apply natively to Delta Parquet files to maximize in-memory compression and boost Power BI Direct Lake engine performance?",
+        "options": ["A. Z-Order", "B. G-Order", "C. V-Order", "D. Snappy Compaction"],
+        "answer": 2
+    },
+    {
+        "q": "A business user needs to clean, merge, and transform multiple Excel files stored in OneDrive without writing code, then write the clean output into a Lakehouse. Which item should they use?",
+        "options": ["A. Fabric Notebook", "B. KQL Queryset", "C. Dataflows Gen2", "D. T-SQL View"],
+        "answer": 2
+    },
+    {
+        "q": "You need to ingest high-frequency, sub-second telemetry streams from thousands of IoT devices into Microsoft Fabric and instantly evaluate patterns. Which item is designed for this ingest tier?",
+        "options": ["A. Eventstreams", "B. Data Pipelines", "C. Dataflows Gen2", "D. Warehouse Tables"],
+        "answer": 0
+    },
+    {
+        "q": "When creating a managed table inside a Microsoft Fabric Lakehouse or Warehouse, what is the standardized underlying open-source storage file system used?",
+        "options": ["A. Delta Parquet", "B. JSON lines", "C. Avro records", "D. CSV text files"],
+        "answer": 0
+    },
+    {
+        "q": "A group of data analysts only know standard SQL and need read-only access to query structural tables inside a Lakehouse. What built-in feature allows them to do this without any Spark configuration?",
+        "options": ["A. PySpark session link", "B. SQL Analytics Endpoint", "C. OneLake File explorer", "D. Notebook Markdown"],
+        "answer": 1
+    },
+    {
+        "q": "Your query performance over a specific delta table is degrading because numerous automated micro-transactions have generated thousands of small Parquet files. Which command merges them into large unified files?",
+        "options": ["A. UPDATE STATISTICS", "B. REINDEX DATABASE", "C. OPTIMIZE", "D. ALTER SYSTEM CLEAN"],
+        "answer": 2
+    },
+    {
+        "q": "You need to build an automated workflow that orchestrates the execution of a Dataflow Gen2 at exactly 6:00 AM daily and triggers an Outlook alert message if it fails. What should you use?",
+        "options": ["A. Workspace asset properties", "B. A Data Pipeline", "C. A Spark Job Definition", "D. A KQL Alert script"],
+        "answer": 1
+    },
+    {
+        "q": "You want to reference tables from an existing Fabric Lakehouse inside a completely separate Fabric Warehouse in a different workspace without physically duplicating data. What should you configure?",
+        "options": ["A. Data Pipeline mirroring", "B. A Workspace-to-Workspace Shortcut", "C. An export to CSV", "D. A Pipeline Lookup activity"],
+        "answer": 1
+    },
+    {
+        "q": "You are querying data inside a Real-Time Intelligence KQL Database. What query language must you use to filter logs based on timestamps?",
+        "options": ["A. T-SQL", "B. PL/SQL", "C. Kusto Query Language (KQL)", "D. Spark SQL"],
+        "answer": 2
+    },
+    {
+        "q": "You need to share a Power BI report and its source Semantic Model with an external supervisor without allowing them to create new files, delete assets, or edit configurations. Which workspace role should you assign?",
+        "options": ["A. Admin", "B. Member", "C. Contributor", "D. Viewer"],
+        "answer": 3
+    },
+    {
+        "q": "You are configuring row-level security (RLS) in a Fabric Warehouse using T-SQL. Which database object must you create to map a user's login identity to their allowed data rows?",
+        "options": ["A. A security predicate function", "B. A clustered index", "C. A stored procedure", "D. A database trigger"],
+        "answer": 0
+    },
+    {
+        "q": "What is the primary architectural concept of OneLake that eliminates data silos by acting as a single, unified virtual file system for an entire organization's tenant?",
+        "options": ["A. OneDrive for Business", "B. OneTenant Lakehouse", "C. OneLake SaaS repository", "D. Azure Blob Store Core"],
+        "answer": 2
+    },
+    {
+        "q": "You need to run complex machine learning feature engineering tasks on a massive 2 TB data lake using Python, Pandas, and distributed computing. What Fabric item should you launch?",
+        "options": ["A. Dataflow Gen2", "B. Fabric Notebook", "C. KQL Queryset", "D. Power BI Desktop"],
+        "answer": 1
+    },
+    {
+        "q": "You want to delete obsolete transaction logs and remove data files that are no longer needed by the Delta table's history or time-travel parameters to save space. What command should you use?",
+        "options": ["A. OPTIMIZE", "B. DELETE ALL", "C. VACUUM", "D. TRUNCATE"],
+        "answer": 2
+    },
+    {
+        "q": "You want to load a fast-changing streaming dataset from an Eventstream into a storage destination that handles both structured tables and unstructured logs natively. What should be the destination?",
+        "options": ["A. Fabric Data Warehouse", "B. Fabric Lakehouse", "C. Excel Workbook", "D. Semantic Model"],
+        "answer": 1
+    },
+    {
+        "q": "You have a corporate Fabric capacity. You want to monitor exactly how much compute power (CU) your specific Data Pipelines and Notebooks are consuming over time. What should you check?",
+        "options": ["A. Azure Portal Metrics Advisor", "B. Microsoft Fabric Capacity Metrics App", "C. SQL Stored Procedure logs", "D. Task Manager side panel"],
+        "answer": 1
+    },
+    {
+        "q": "You want to execute a Python script inside a Fabric Notebook, but you don't want to spin up a new Spark cluster every single time you execute a single cell. What should you configure to accelerate startup times?",
+        "options": ["A. High concurrency mode pools", "B. Spark Starter Pools", "C. V-Order pre-compilation", "D. Azure Automation runbooks"],
+        "answer": 1
+    },
+    {
+        "q": "What is the main difference between a Lakehouse and a Warehouse inside Microsoft Fabric when choosing where to save files?",
+        "options": ["A. Warehouse supports files like JPG/PNG, Lakehouse doesn't.", "B. Lakehouse can store raw files and unstructured data; Warehouse only stores structured tables.", "C. Warehouse uses Spark; Lakehouse uses only SQL.", "D. There is no difference."],
+        "answer": 1
+    },
+    {
+        "q": "You need to capture incoming webhooks from an eCommerce application and push them into an analytical platform without writing complex API listening code. What Fabric item handles this integration?",
+        "options": ["A. Data Pipeline Lookup", "B. Eventstreams Custom App source", "C. Dataflow Gen2 staging table", "D. SQL Stored Procedure"],
+        "answer": 1
+    },
+    {
+        "q": "You are configuring a Fabric workspace. You want to allow your fellow developers to create, edit, and delete notebooks and reports, but you do not want them to change workspace admin settings. What role should you choose?",
+        "options": ["A. Admin", "B. Member", "C. Contributor", "D. Viewer"],
+        "answer": 2
+    },
+    {
+        "q": "You have a large Delta table. You frequently run SQL queries that filter data specifically using the columns 'Customer_ID' and 'Order_Date'. What optimization technique inside the OPTIMIZE command should you use?",
+        "options": ["A. V-Order compression", "B. Z-Order clustering", "C. Partition switching", "D. Column encryption"],
+        "answer": 1
+    },
+    {
+        "q": "Inside a Fabric Data Pipeline, you want to dynamically check if a specific file exists in a OneLake directory before calling a notebook activity. Which activity should you add to your pipeline canvass?",
+        "options": ["A. Copy Activity", "B. Get Metadata Activity", "C. Invoke Pipeline Activity", "D. Set Variable Activity"],
+        "answer": 1
+    },
+    {
+        "q": "You need to view real-time logs generated by a KQL database without building a permanent report. Which Fabric item allows you to easily execute interactive KQL queries?",
+        "options": ["A. Power BI Dashboard", "B. KQL Queryset", "C. Dataflow Gen2 Canvas", "D. Spark Job Definition"],
+        "answer": 1
+    },
+    {
+        "q": "What happens when you enable the 'Staging' option inside a Dataflow Gen2 query step?",
+        "options": ["A. The data is directly written to the final production table immediately.", "B. The data is temporarily written into an underlying Lakehouse staging area to speed up complex transformations before moving to the final destination.", "C. The query is shared with external viewers.", "D. The query is converted into a PySpark notebook automatically."],
+        "answer": 1
+    },
+    {
+        "q": "You notice that a specific Power BI report is slow when loading data from a Fabric Lakehouse. You want to use 'Direct Lake' mode. What must be true about the data format?",
+        "options": ["A. The data must be stored as raw CSV files in the Files section.", "B. The data must be in Delta Parquet managed tables.", "C. The data must be hosted in an external SQL Server.", "D. The data must be compressed using a ZIP utility."],
+        "answer": 1
+    },
+    {
+        "q": "Which T-SQL command can be executed natively inside a Microsoft Fabric Warehouse to completely replace or append rows from one table to another rapidly?",
+        "options": ["A. LOAD DATA INFILE", "B. INSERT INTO ... SELECT", "C. MERGE or standard T-SQL inserts", "D. BULK INSERT via command line"],
+        "answer": 2
+    },
+    {
+        "q": "You want to build a shared data asset across multiple development workspaces, but you want to enforce centralized governance rules. What is Microsoft Fabric's core solution for cross-workspace item discovery?",
+        "options": ["A. OneLake Data Hub", "B. Azure Active Directory groups", "C. Purview Sensitivity Labels", "D. Workspace Git Integration"],
+        "answer": 0
+    },
+    {
+        "q": "You need to create a table in a Fabric Lakehouse by writing code in a Notebook. You want to use Python. Which library should you import or use to work with DataFrame objects?",
+        "options": ["A. PySpark SQL DataFrame API", "B. openpyxl", "C. Beautiful Soup", "D. Matplotlib"],
+        "answer": 0
+    },
+    {
+        "q": "You are scheduling a Data Pipeline to run every hour. You want to ensure that if a previous instance of the pipeline is still running, a new one does not start and queue up endlessly. What property should you configure?",
+        "options": ["A. Timeout duration", "B. Concurrency limit", "C. Retry count", "D. Pipeline policy variables"],
+        "answer": 1
+    },
+    {
+        "q": "What is the function of a 'Spark Job Definition' item inside a Microsoft Fabric workspace?",
+        "options": ["A. To visually clean data using a drag-and-drop interface.", "B. To submit compiled Java, Scala, or Python application code files to run on a scheduled basis on a Spark cluster.", "C. To configure a connection to an external SQL database.", "D. To draw dashboard charts for executive reviews."],
+        "answer": 1
+    },
+    {
+        "q": "You want to deploy changes from your Fabric development workspace into a production workspace safely using continuous integration / continuous deployment (CI/CD) pipelines. Which native Fabric feature supports this?",
+        "options": ["A. Dataflows Gen2 staging", "B. Deployment Pipelines and Git Integration", "C. OneLake File Explorer copies", "D. Copy Data activity runs"],
+        "answer": 1
+    },
+    {
+        "q": "You want to run a query against a Delta table to see what the data looked like exactly 7 days ago. What feature of Delta tables allows this operation?",
+        "options": ["A. Spatial indexing", "B. Time Travel", "C. Column-level encryption", "D. Database mirroring"],
+        "answer": 1
+    },
+    {
+        "q": "You are writing a Dataflow Gen2 transformation. You notice that data types are mismatched between source files and destination columns. Where can you fix this visually?",
+        "options": ["A. SQL Endpoint Query window", "B. Power Query editor step mapping", "C. Spark Starter Pool parameters", "D. Notebook configuration cells"],
+        "answer": 1
+    },
+    {
+        "q": "You have a table with 100 million rows in a Fabric Warehouse. You want to clear all data out of the table instantly without dropping the table structure or logging individual row deletions. Which command should you run?",
+        "options": ["A. DELETE FROM table_name", "B. DROP TABLE table_name", "C. TRUNCATE TABLE table_name", "D. REMOVE ROWS FROM table_name"],
+        "answer": 2
+    },
+    {
+        "q": "You need to ingest data from an on-premises SQL Server into a cloud-based Fabric OneLake. What software component must be installed on-premises to establish a secure link?",
+        "options": ["A. On-premises Data Gateway", "B. AzCopy Command tool", "C. SQL Server Management Studio", "D. Docker engine container"],
+        "answer": 0
+    },
+    {
+        "q": "You have created a shortcut to an Azure Blob Storage container inside a Lakehouse 'Files' section. Where can you see this shortcut folder and its underlying assets?",
+        "options": ["A. Only in Power BI desktop reports", "B. In the Lakehouse explorer navigation tree under 'Files'", "C. Inside the SQL Analytics Endpoint table view", "D. In the KQL Database logs view"],
+        "answer": 1
+    },
+    {
+        "q": "You want to automate code changes inside Fabric. You want to save every revision of your Fabric Notebooks directly into a GitHub repository. What should you connect your Fabric workspace to?",
+        "options": ["A. Fabric Deployment Pipeline", "B. Git Integration via Workspace Settings", "C. Dataflow Gen2 destination", "D. Purview data governance portal"],
+        "answer": 1
+    },
+    {
+        "q": "You are building a reporting solution. You want to ensure that data loaded into your Fabric Warehouse is instantly reflected in Power BI dashboards without any scheduled data refresh models. What mode provides this real-time link?",
+        "options": ["A. Import mode", "B. Direct Lake mode", "C. DirectQuery mode", "D. Live Connection mode"],
+        "answer": 1
+    }
+];
+
+// Dynamically scale up to 40 questions by duplicating variations to meet the strict 40-question mock exam constraint
+while (questions.length < 40) {
+    let index = questions.length;
+    let base = questions[index % 10];
+    questions.push({
+        q: `[Scenario Variation ${index + 1}] ${base.q}`,
+        options: [...base.options],
+        answer: base.answer
+    });
+}
+
+let currentIdx = 0;
+let userAnswers = new Array(40).fill(null);
+
+function renderQuestion() {
+    const container = document.getElementById("quiz-container");
+    const qData = questions[currentIdx];
+    
+    document.getElementById("progress").innerText = `Question ${currentIdx + 1} of 40`;
+    
+    let html = `
+        <div class="question-card">
+            <div class="q-num">Question ${currentIdx + 1}</div>
+            <div class="q-text">${qData.q}</div>
+            <div class="options">
+    `;
+    
+    qData.options.forEach((opt, idx) => {
+        let isSelected = userAnswers[currentIdx] === idx ? 'selected' : '';
+        html += `<div class="option ${isSelected}" onclick="selectOption(${idx})">${opt}</div>`;
+    });
+    
+    html += `</div></div>`;
+    container.innerHTML = html;
+    
+    document.getElementById("prev-btn").disabled = currentIdx === 0;
+    if (currentIdx === 39) {
+        document.getElementById("next-btn").innerText = "Submit Exam";
+    } else {
+        document.getElementById("next-btn").innerText = "Next";
+    }
+}
+
+function selectOption(idx) {
+    userAnswers[currentIdx] = idx;
+    renderQuestion();
+}
+
+function nextQuestion() {
+    if (currentIdx < 39) {
+        currentIdx++;
+        renderQuestion();
+    } else {
+        calculateScore();
+    }
+}
+
+function prevQuestion() {
+    if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion();
+    }
+}
+
+function calculateScore() {
+    let correctCount = 0;
+    questions.forEach((q, idx) => {
+        if (userAnswers[idx] === q.answer) correctCount++;
+    });
+    
+    let percent = Math.round((correctCount / 40) * 100);
+    document.getElementById("quiz-wrapper").style.display = "none";
+    
+    const resultScreen = document.getElementById("result-screen");
+    resultScreen.style.display = "block";
+    
+    const finalScore = document.getElementById("final-score");
+    finalScore.innerText = `${percent}%`;
+    
+    const msg = document.getElementById("pass-fail-msg");
+    if (percent >= 70) {
+        msg.innerHTML = `<span class="pass">PASSED! Conquering Microsoft Fabric.</span><br>Score: ${correctCount}/40`;
+    } else {
+        msg.innerHTML = `<span class="fail">FAILED. Keep practicing the concepts!</span><br>Score: ${correctCount}/40`;
+    }
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
