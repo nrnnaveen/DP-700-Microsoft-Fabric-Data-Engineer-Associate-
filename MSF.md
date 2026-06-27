@@ -4,6 +4,22 @@ Microsoft Fabric is an all-in-one cloud-based data analytics platform
 by Microsoft that helps organizations collect, store, process, analyze,
 and visualize data from a single unified environment.
 
+'''
+┌─────────────────────────────────────────────────────────────────┐
+│               Microsoft Fabric (Unified SaaS)                   │
+│                                                                 │
+│  ┌─────────────────────────── Compute ───────────────────────┐  │
+│  │Data Factory | Engineering | Warehouse | Science | Power BI│  │
+│  └──────────────────────────────┬────────────────────────────┘  │
+│                                 ▼                               │
+│  ┌────────────────────────── Storage ────────────────────────┐  │
+│  │                    OneLake (Delta Parquet)                │  │
+│  └───────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+
+'''
+
+
 | Components                  | Simple Meaning        | Main Purpose                  |
 | -------------------------- | --------------------- | ------------------------------ |
 | **OneLake**                | One storage           | Store all data                 |
@@ -20,48 +36,6 @@ and visualize data from a single unified environment.
 | **SQL Endpoint**           | SQL access            | Query data with SQL            |
 
 
-
-### Microsoft Fabric Architecture
-
-                 Microsoft Fabric
-
-     ┌──────────────────────────────────┐
-     │        OneLake (Storage)          │
-     └──────────────────────────────────┘
-                     
-                     │
-                     ▼
-     ┌──────────────────────────────────┐
-     │      Data Factory (ETL)          │
-     └──────────────────────────────────┘
-                     │
-                     ▼
-      ┌────────────────────────────┐
-      │      Lakehouse             │
-      └────────────────────────────┘
-
-      ┌────────────────────────────┐
-      │      Data Warehouse        │
-      └────────────────────────────┘
-
-      ┌────────────────────────────┐
-      │     Data Engineering       │
-      └────────────────────────────┘
-
-      ┌────────────────────────────┐
-      │      Data Science          │
-      └────────────────────────────┘
-
-      ┌────────────────────────────┐
-      │  Real-Time Intelligence    │
-      └────────────────────────────┘
-
-      ┌────────────────────────────┐
-      │       Power BI             │
-      └────────────────────────────┘
-
-
----
 
 # 1. OneLake 🗂️ (Storage)
 
