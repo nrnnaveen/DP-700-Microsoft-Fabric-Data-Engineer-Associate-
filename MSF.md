@@ -4,21 +4,23 @@ Microsoft Fabric is an all-in-one cloud-based data analytics platform
 by Microsoft that helps organizations collect, store, process, analyze,
 and visualize data from a single unified environment.
 
-'''
-┌─────────────────────────────────────────────────────────────────┐
-│               Microsoft Fabric (Unified SaaS)                   │
-│                                                                 │
-│  ┌─────────────────────────── Compute ───────────────────────┐  │
-│  │Data Factory | Engineering | Warehouse | Science | Power BI│  │
-│  └──────────────────────────────┬────────────────────────────┘  │
-│                                 ▼                               │
-│  ┌────────────────────────── Storage ────────────────────────┐  │
-│  │                    OneLake (Delta Parquet)                │  │
-│  └───────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
+                Microsoft Fabric
+                       │
+        ┌──────────────┴──────────────┐
+        │        Compute Layer        │
+        │─────────────────────────────│
+        │ • Data Factory              │
+        │ • Data Engineering          │
+        │ • Warehouse                 │
+        │ • Data Science              │
+        │ • Power BI                  │
+        └──────────────┬──────────────┘
+                       │
+                       ▼
+               OneLake (Storage)
+             Delta Parquet Format
 
-'''
-
+---
 
 | Components                  | Simple Meaning        | Main Purpose                  |
 | -------------------------- | --------------------- | ------------------------------ |
@@ -35,7 +37,7 @@ and visualize data from a single unified environment.
 | **Spark**                  | Processing engine     | Fast big data processing       |
 | **SQL Endpoint**           | SQL access            | Query data with SQL            |
 
-
+---
 
 # 1. OneLake 🗂️ (Storage)
 
