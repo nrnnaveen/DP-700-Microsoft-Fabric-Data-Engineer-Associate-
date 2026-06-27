@@ -1,7 +1,12 @@
 
 # DP-700 Exam Overview
 
-Exam Preparation
+Exam Preparation 
+
+### Previosly Asked Questions In Exam
+
+*** https://certyiq.com/papers/microsoft/dp-700/1 *** 
+*** https://www.examtopics.com/exams/microsoft/dp-700/view/ ***
 
 ---
 
@@ -813,4 +818,6 @@ Analyzes Streaming Data & Logs
 ```
 
 Mastering these concepts will cover the majority of the practical scenarios you are likely to encounter in the exam.
+
+### --- Prepared By Naveen
 
