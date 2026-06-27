@@ -5,9 +5,9 @@ Exam Preparation
 
 ### Previosly Asked Questions In Exam
 
-***https://certyiq.com/papers/microsoft/dp-700/1*** 
+||***https://certyiq.com/papers/microsoft/dp-700/1*** ||
 ***https://www.examtopics.com/exams/microsoft/dp-700/view/***
-
+||
 ---
 
 The exam is divided into **3 major sections**.
