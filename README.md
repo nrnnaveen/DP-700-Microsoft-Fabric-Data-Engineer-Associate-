@@ -1,8 +1,9 @@
-# DP-700-Microsoft-Fabric-Data-Engineer-Associate-
-Exam Preparation 
----
 
 # DP-700 Exam Overview
+
+Exam Preparation
+
+---
 
 The exam is divided into **3 major sections**.
 
