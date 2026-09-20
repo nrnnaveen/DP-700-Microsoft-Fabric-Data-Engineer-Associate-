@@ -3,6 +3,9 @@
 
 Exam Preparation 
 
+Type :- Intermediate 
+Category:- Data Engineer 
+
 ### Previosly Asked Questions In Exam
 
 Exam Prep Going Onn--
