@@ -1,7 +1,15 @@
 
 # DP-700 Exam Overview
 
-Exam Preparation 
+Naveen M
+
+Microsoft Certified: Fabric Data Engineer Associate
+
+
+🏅 Microsoft Certification :-https://learn.microsoft.com/api/credentials/share/en-in/NAVEENM96/BD709340A36444CC?sharingId=B71E781BB2C6FF43
+
+
+Exam Prep
 
 Type :- Intermediate 
 
@@ -9,7 +17,11 @@ Category:- Data Engineer
 
 ### Previosly Asked Questions In Exam
 
-Exam Prep Going Onn--
+Focus On The Previously Asked Questions Is Very Helpfull You To Pass This Exam 
+
+Search For DP-700 Dumps In Google For Get These Previously Asked Questions 
+
+
 
 || ***https://certyiq.com/papers/microsoft/dp-700/1*** || ***https://www.examtopics.com/exams/microsoft/dp-700/view/*** ||  DP700 Dumps
 
